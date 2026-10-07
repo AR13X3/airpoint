@@ -1,0 +1,37 @@
+# OS and editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.iml
+.vscode/
+.claude/
+.local/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.log
+desktop/build/
+desktop/dist/
+
+# Android / Gradle
+**/.gradle/
+**/build/
+**/local.properties
+**/.cxx/
+**/captures/
+.kotlin/
+
+# Samsung's S Pen Remote SDK is proprietary: never commit it (see android/app/libs/README.md)
+android/app/libs/*.jar
+android/app/libs/*.aar
+*.zip
+
+# Signing material
+keystore.properties
+*.jks
+*.keystore
