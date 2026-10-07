@@ -170,8 +170,11 @@ class AirpointServer:
                         holding = False
                 elif kind == "center":
                     self.driver.center()
-                elif kind == "config" and "smooth_alpha" in msg:
-                    self.driver.set_alpha(protocol.finite(msg.get("smooth_alpha"), 0.42))
+                elif kind == "config":
+                    if "smooth_alpha" in msg:
+                        self.driver.set_alpha(protocol.finite(msg.get("smooth_alpha"), 0.42))
+                    if isinstance(msg.get("edge_scroll"), bool):
+                        self.driver.set_edge_scroll(msg["edge_scroll"])
         except ConnectionClosed:
             pass
         finally:

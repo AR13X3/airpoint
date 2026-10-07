@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -35,6 +37,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.draw.clip
+import io.github.ar13x3.airpoint.ui.theme.Radii
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.ar13x3.airpoint.AirpointApp
@@ -77,23 +82,16 @@ fun SettingsScreen(onBack: () -> Unit) {
         Spacer(Modifier.height(16.dp))
 
         SectionLabel(stringResource(R.string.settings_pointer), Modifier.enterStagger(0))
-        AirCard(Modifier.fillMaxWidth().enterStagger(0), padding = 18.dp) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    Text(stringResource(R.string.settings_double_press), style = MaterialTheme.typography.titleMedium, color = c.text)
-                    Spacer(Modifier.height(2.dp))
-                    Text(stringResource(R.string.settings_double_press_body), style = MaterialTheme.typography.bodyMedium, color = c.textSecondary)
-                }
-                Spacer(Modifier.width(16.dp))
-                Switch(
-                    settings.doublePressCenters,
-                    { v -> scope.launch { app.settings.setDoublePressCenters(v) } },
-                    colors = SwitchDefaults.colors(
-                        checkedTrackColor = c.accent, checkedThumbColor = c.onAccent,
-                        uncheckedTrackColor = c.surfaceSunken, uncheckedBorderColor = c.outlineStrong, uncheckedThumbColor = c.textTertiary,
-                    ),
-                )
-            }
+        AirCard(Modifier.fillMaxWidth().enterStagger(0), padding = 6.dp) {
+            SwitchRow(
+                stringResource(R.string.settings_edge_scroll), stringResource(R.string.settings_edge_scroll_body),
+                settings.edgeScroll,
+            ) { v -> scope.launch { app.settings.setEdgeScroll(v) } }
+            HorizontalDivider(Modifier.padding(horizontal = 14.dp), color = c.outline)
+            SwitchRow(
+                stringResource(R.string.settings_double_press), stringResource(R.string.settings_double_press_body),
+                settings.doublePressCenters,
+            ) { v -> scope.launch { app.settings.setDoublePressCenters(v) } }
         }
 
         Spacer(Modifier.height(24.dp))
@@ -191,6 +189,34 @@ fun SettingsScreen(onBack: () -> Unit) {
             },
             confirmButton = { TextButton({ licenses = false }) { Text(stringResource(R.string.done)) } },
             containerColor = c.surface,
+        )
+    }
+}
+
+/** A setting with a switch. The whole row toggles it, and TalkBack reads it as one switch. */
+@Composable
+private fun SwitchRow(title: String, body: String, checked: Boolean, onChange: (Boolean) -> Unit) {
+    val c = Air.colors
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(Radii.md)
+            .toggleable(checked, role = Role.Switch, onValueChange = onChange)
+            .padding(horizontal = 14.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.titleMedium, color = c.text)
+            Spacer(Modifier.height(2.dp))
+            Text(body, style = MaterialTheme.typography.bodyMedium, color = c.textSecondary)
+        }
+        Spacer(Modifier.width(16.dp))
+        Switch(
+            checked, onCheckedChange = null,
+            colors = SwitchDefaults.colors(
+                checkedTrackColor = c.accent, checkedThumbColor = c.onAccent,
+                uncheckedTrackColor = c.surfaceSunken, uncheckedBorderColor = c.outlineStrong, uncheckedThumbColor = c.textTertiary,
+            ),
         )
     }
 }

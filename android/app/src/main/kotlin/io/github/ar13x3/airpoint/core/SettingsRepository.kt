@@ -23,6 +23,8 @@ data class UserSettings(
     /** 1..100, higher is smoother (more easing on the PC). */
     val smoothness: Float = 68f,
     val doublePressCenters: Boolean = true,
+    /** Pushing the cursor past a screen edge scrolls in that direction. */
+    val edgeScroll: Boolean = true,
     val theme: ThemeMode = ThemeMode.System,
     val onboarded: Boolean = false,
     val lastPcId: String? = null,
@@ -43,6 +45,7 @@ class SettingsRepository(private val context: Context) {
         val sensitivity = floatPreferencesKey("sensitivity")
         val smoothness = floatPreferencesKey("smoothness")
         val doublePress = booleanPreferencesKey("double_press_centers")
+        val edgeScroll = booleanPreferencesKey("edge_scroll")
         val theme = stringPreferencesKey("theme")
         val onboarded = booleanPreferencesKey("onboarded")
         val lastPc = stringPreferencesKey("last_pc")
@@ -55,6 +58,7 @@ class SettingsRepository(private val context: Context) {
             sensitivity = p[Keys.sensitivity] ?: 25f,
             smoothness = p[Keys.smoothness] ?: 68f,
             doublePressCenters = p[Keys.doublePress] ?: true,
+            edgeScroll = p[Keys.edgeScroll] ?: true,
             theme = p[Keys.theme]?.let { runCatching { ThemeMode.valueOf(it) }.getOrNull() } ?: ThemeMode.System,
             onboarded = p[Keys.onboarded] ?: false,
             lastPcId = p[Keys.lastPc],
@@ -68,6 +72,7 @@ class SettingsRepository(private val context: Context) {
     suspend fun setSensitivity(v: Float) = edit { it[Keys.sensitivity] = v }
     suspend fun setSmoothness(v: Float) = edit { it[Keys.smoothness] = v }
     suspend fun setDoublePressCenters(v: Boolean) = edit { it[Keys.doublePress] = v }
+    suspend fun setEdgeScroll(v: Boolean) = edit { it[Keys.edgeScroll] = v }
     suspend fun setTheme(v: ThemeMode) = edit { it[Keys.theme] = v.name }
     suspend fun setOnboarded() = edit { it[Keys.onboarded] = true }
 

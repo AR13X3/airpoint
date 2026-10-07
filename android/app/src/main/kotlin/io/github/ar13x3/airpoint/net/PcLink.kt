@@ -140,8 +140,10 @@ class PcLink(
         send(JSONObject().put("type", "center"))
     }
 
-    fun sendSmoothing(alpha: Float) =
-        send(JSONObject().put("type", "config").put("smooth_alpha", alpha.toDouble()))
+    /** Pointer preferences the PC applies: easing, and scrolling when pushed past an edge. */
+    fun sendConfig(smoothAlpha: Float, edgeScroll: Boolean) = send(
+        JSONObject().put("type", "config").put("smooth_alpha", smoothAlpha.toDouble()).put("edge_scroll", edgeScroll)
+    )
 
     private fun send(json: JSONObject): Boolean = welcomed && socket?.send(json.toString()) == true
 

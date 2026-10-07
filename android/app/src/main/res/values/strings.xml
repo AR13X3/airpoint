@@ -116,6 +116,8 @@
 
     <!-- Settings -->
     <string name="settings_pointer">Pointer</string>
+    <string name="settings_edge_scroll">Scroll at screen edges</string>
+    <string name="settings_edge_scroll_body">Keep pushing past the top or bottom of the screen to scroll, or past the sides to scroll sideways.</string>
     <string name="settings_double_press">Double-press to center</string>
     <string name="settings_double_press_body">Press the S Pen button twice to bring the cursor to the middle of the screen.</string>
     <string name="settings_appearance">Appearance</string>

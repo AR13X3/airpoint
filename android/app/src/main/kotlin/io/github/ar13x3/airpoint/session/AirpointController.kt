@@ -70,9 +70,9 @@ class AirpointController(
     init {
         scope.launch {
             settingsRepo.settings.collect { s ->
-                val smoothingChanged = s.smoothingAlpha != settings.smoothingAlpha
+                val configChanged = s.smoothingAlpha != settings.smoothingAlpha || s.edgeScroll != settings.edgeScroll
                 settings = s
-                if (smoothingChanged) link?.sendSmoothing(s.smoothingAlpha)
+                if (configChanged) link?.sendConfig(s.smoothingAlpha, s.edgeScroll)
             }
         }
     }
@@ -127,7 +127,7 @@ class AirpointController(
             sensitivity = sensitivity ?: before.sensitivity,
             smoothness = smoothness ?: before.smoothness,
         )
-        if (settings.smoothingAlpha != before.smoothingAlpha) link?.sendSmoothing(settings.smoothingAlpha)
+        if (settings.smoothingAlpha != before.smoothingAlpha) link?.sendConfig(settings.smoothingAlpha, settings.edgeScroll)
     }
 
     fun centerCursor(): Boolean {
@@ -233,7 +233,7 @@ class AirpointController(
                 if (link !== created) return
                 attempts = 0
                 _state.update { it.copy(link = LinkState(LinkPhase.Connected, pc.endpoint.copy(name = name))) }
-                created.sendSmoothing(settings.smoothingAlpha)
+                created.sendConfig(settings.smoothingAlpha, settings.edgeScroll)
                 scope.launch { settingsRepo.touch(pc.id, pc.host, pc.port, name) }
             }
 

@@ -24,6 +24,7 @@ under a new name and identity.
 - Automatic reconnects with backoff, including finding a PC whose IP address changed.
 - Plain-language status and recovery actions for every failure.
 - Speed and smoothing that apply live; optional double-press to center.
+- **Edge scrolling** (on by default): push past a screen edge to scroll in that direction.
 - **Windows tray app** with a status-colored icon, PIN display, paired-phone management,
   pause, start with Windows and a log folder.
 - Simulated S Pen build variant, so the app can be developed without Samsung's SDK.

@@ -57,12 +57,15 @@ automatically.
 | Press the button | Click |
 | Hold the button and wave | Drag |
 | Press twice quickly | Bring the cursor to the middle of the screen |
+| Keep pushing past an edge | Scroll: up or down at the top and bottom, sideways at the sides |
 
 - While Airpoint is pointing, pressing **Back** sends it to the background instead of
   closing it, because closing the app would release the S Pen. To stop, tap **Stop**, or
   use **Stop** in the notification.
 - The **live pad** on the home screen mirrors your pen's motion, which is handy for
   checking the pen is being read.
+- Edge scrolling is proportional: push harder to scroll faster. It pauses while you hold the
+  button to drag. Turn it off in **Settings › Scroll at screen edges**.
 - Double-press to center can be turned off in **Settings › Double-press to center**.
 
 ### Tuning

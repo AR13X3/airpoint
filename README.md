@@ -58,6 +58,8 @@ page. Until then, building takes a few minutes (see below).
 - Smooth, low-latency cursor motion. The phone batches pen motion every 12 ms, and the PC
   eases it at 200 Hz with sub-pixel accuracy.
 - Click, drag (hold the button), and double-press to recenter.
+- Edge scrolling: keep pushing past the top or bottom of the screen to scroll, or past the
+  sides to scroll sideways.
 - Speed and smoothing sliders that apply instantly while you point.
 
 **Zero-config connection**

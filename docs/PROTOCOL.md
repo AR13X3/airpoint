@@ -87,7 +87,7 @@ Events are ignored until `welcome` has been sent.
 | `{"type":"motion","dx":12.5,"dy":-3.0}` | Move the cursor by (dx, dy) pixels, eased (see below) |
 | `{"type":"button","action":"down"}` / `"up"` | Press or release the left mouse button |
 | `{"type":"center"}` | Jump the cursor to the centre of the primary display |
-| `{"type":"config","smooth_alpha":0.42}` | Set easing, 0.05 (silkiest) to 1.0 (instant) |
+| `{"type":"config","smooth_alpha":0.42,"edge_scroll":true}` | Set easing, 0.05 (silkiest) to 1.0 (instant), and whether pushing past a screen edge scrolls. Either key may be omitted. |
 
 Numbers are sanitised on the PC (non-finite values are dropped and large ones clamped).
 Unknown message types are ignored, so newer phones can add events without breaking older
@@ -102,6 +102,20 @@ PCs.
 2. **PC.** Incoming deltas are queued. A 200 Hz loop moves the cursor by `alpha` × the
    remaining distance per tick and carries sub-pixel remainders forward, which turns
    bursty Wi-Fi delivery into smooth motion. The loop sleeps when there's nothing queued.
+
+**Edge scrolling.** Each tick, the PC adds the requested move to the cursor's position and
+asks Windows whether that point lies on any monitor. If it doesn't, the overshoot past the
+nearest monitor's edge is a push, and 40 px of push equals one wheel notch. (Comparing
+requested with actual movement is unreliable, because Windows drops about 1% of cursor
+moves, and those would read as phantom edge hits.) Three details make it usable:
+
+- **Aimed at the content.** At an edge, the window under the cursor is the taskbar or a
+  title bar, which ignore the wheel. Each notch is injected 200 logical px inside the edge
+  (scaled for the monitor's DPI) as one atomic input batch: move there, wheel, move back.
+  The cursor stays at the edge.
+- **The edge absorbs a flick.** Hitting an edge drops the rest of that flick's queued motion,
+  so reaching for a tab doesn't lurch the page. Only continued pushing scrolls.
+- **Not while dragging.** Apps already auto-scroll a drag that reaches an edge.
 
 If a phone disconnects while holding the button, the PC releases it, so the mouse can't
 get stuck down.
