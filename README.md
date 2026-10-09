@@ -38,10 +38,16 @@ other automatically and pair once with a PIN.
 You need a Galaxy phone or tablet whose S Pen supports **Air actions** (Bluetooth), on
 Android 12 or later, and a Windows 10 or 11 PC on the same network.
 
-1. **On the PC,** run `Airpoint.exe`. When Windows Firewall asks, allow it on **private
-   networks**. A loop icon appears in the system tray.
-2. **On the phone,** install Airpoint and open it. The short welcome asks for two
-   permissions: Nearby devices (for the pen) and Notifications.
+Download both apps from the **[latest release](https://github.com/AR13X3/airpoint/releases/latest)**:
+`Airpoint.exe` for the PC and `Airpoint-1.0.0.apk` for the phone.
+
+1. **On the PC,** run `Airpoint.exe`. It isn't code-signed yet, so Windows SmartScreen may
+   say *Windows protected your PC*: choose **More info › Run anyway**. When Windows Firewall
+   asks, allow it on **private networks**. A loop icon appears in the system tray.
+2. **On the phone,** open the APK and install it. (If installation is blocked, turn off
+   **Auto Blocker** under Settings › Security and privacy, and allow your browser to install
+   apps when asked.) The short welcome asks for two permissions: Nearby devices (for the pen)
+   and Notifications.
 3. Tap **Start pointing**. Your PC shows up on the radar. Tap it and type the 6-digit PIN
    from the tray icon on the PC.
 4. Wave the pen. That's it. Next time, just tap Start.
@@ -49,8 +55,7 @@ Android 12 or later, and a Windows 10 or 11 PC on the same network.
 The **[user guide](docs/GUIDE.md)** covers every control, the tray menu and
 troubleshooting.
 
-Prebuilt downloads will be on the [Releases](https://github.com/AR13X3/airpoint/releases)
-page. Until then, building takes a few minutes (see below).
+Prefer to build it yourself? See [Build from source](#build-from-source).
 
 ## Features
 

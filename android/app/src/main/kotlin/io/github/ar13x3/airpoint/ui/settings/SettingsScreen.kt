@@ -1,21 +1,17 @@
 package io.github.ar13x3.airpoint.ui.settings
 
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.selection.toggleable
@@ -41,6 +37,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import io.github.ar13x3.airpoint.ui.theme.Radii
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.ar13x3.airpoint.AirpointApp
 import io.github.ar13x3.airpoint.BuildConfig
@@ -141,7 +138,7 @@ fun SettingsScreen(onBack: () -> Unit) {
             ListRow(
                 stringResource(R.string.settings_source), subtitle = stringResource(R.string.settings_source_body),
                 icon = AirIcons.Code,
-                onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.REPO_URL))) },
+                onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, BuildConfig.REPO_URL.toUri())) },
             ) { Icon(AirIcons.ChevronRight, null, Modifier.size(20.dp), tint = c.textTertiary) }
             ListRow(stringResource(R.string.settings_licenses), icon = AirIcons.Info, onClick = { licenses = true }) {
                 Icon(AirIcons.ChevronRight, null, Modifier.size(20.dp), tint = c.textTertiary)

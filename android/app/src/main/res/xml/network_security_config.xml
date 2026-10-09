@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Airpoint talks to a PC on the local network over ws:// (there is no certificate to pin
      on a home LAN). Pairing tokens, not TLS, keep strangers out; see docs/PROTOCOL.md. -->
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true" />
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <base-config cleartextTrafficPermitted="true" tools:ignore="InsecureBaseConfiguration" />
 </network-security-config>

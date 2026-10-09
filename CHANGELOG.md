@@ -3,7 +3,7 @@
 Notable changes to Airpoint. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and versions follow [Semantic Versioning](https://semver.org/).
 
-## [1.0.0] - 2026-10-07
+## [1.0.0] - 2026-10-09
 
 First public release. This is a ground-up rebuild of the earlier *S Pen Pointer* prototype
 under a new name and identity.
@@ -37,6 +37,7 @@ under a new name and identity.
 - The mouse button is released if a phone disconnects mid-press.
 - Sub-pixel motion no longer loses a pixel to floating-point rounding.
 - Release builds are minified with R8 (3 MB APK).
+- Pairing tokens are excluded from cloud backups and device transfers.
 
 ### Removed
 

@@ -10,7 +10,10 @@
 
 ## Set up the computer
 
-1. Run **Airpoint.exe**. There's no installer, so keep it wherever you like.
+1. Download **Airpoint.exe** from the [latest release](https://github.com/AR13X3/airpoint/releases/latest)
+   and run it. There's no installer, so keep it wherever you like. The app isn't code-signed
+   yet, so Windows SmartScreen may show *Windows protected your PC*. Choose **More info ›
+   Run anyway**. (All of its source code is in this repository.)
 2. The first time, Windows Firewall asks whether to allow Airpoint. Choose **Private
    networks** and allow it. Without this, your phone can't find or reach the PC.
 3. A loop icon appears in the system tray (you may need to click **^** to see it). Its
@@ -36,14 +39,19 @@ Right-click the icon (or left-click to see the PIN):
 
 ## Set up the phone
 
-1. Install and open Airpoint. The welcome screens explain what it does and ask for two
+1. On the phone, download **Airpoint-1.0.0.apk** from the [latest release](https://github.com/AR13X3/airpoint/releases/latest)
+   and open it to install. If Android refuses:
+   - Turn off **Auto Blocker** (Settings › Security and privacy › Auto Blocker). It blocks
+     every app that doesn't come from the Galaxy Store or Play Store.
+   - When asked, allow your browser (or Files app) to install unknown apps.
+2. Open Airpoint. The welcome screens explain what it does and ask for two
    permissions:
    - **Nearby devices** is required. It's how the app talks to your S Pen over Bluetooth.
    - **Notifications** is recommended. It keeps Airpoint running while you use other apps
      and puts Center and Stop in your notification shade.
-2. Tap **Start pointing**. The first time, this opens **Connect a computer**.
-3. Your PC appears on the radar within a few seconds. Tap it.
-4. Type the PIN shown in the PC's tray. Airpoint pairs, comes back to the home screen and
+3. Tap **Start pointing**. The first time, this opens **Connect a computer**.
+4. Your PC appears on the radar within a few seconds. Tap it.
+5. Type the PIN shown in the PC's tray. Airpoint pairs, comes back to the home screen and
    starts pointing.
 
 Next time, open Airpoint and tap **Start pointing**. It reconnects to the last computer

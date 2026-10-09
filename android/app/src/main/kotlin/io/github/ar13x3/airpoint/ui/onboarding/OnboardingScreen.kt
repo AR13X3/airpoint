@@ -1,6 +1,7 @@
 package io.github.ar13x3.airpoint.ui.onboarding
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -49,7 +50,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.ar13x3.airpoint.BuildConfig
@@ -85,12 +85,13 @@ fun OnboardingScreen(onDone: () -> Unit) {
             .windowInsetsPadding(WindowInsets.safeDrawing),
     ) {
         HorizontalPager(pager, Modifier.weight(1f)) { page ->
-            val offset = (pager.currentPage - page) + pager.currentPageOffsetFraction
+            // Read inside graphicsLayer (draw phase) so paging doesn't recompose every frame.
+            fun offset() = (pager.currentPage - page) + pager.currentPageOffsetFraction
             Column(
                 Modifier
                     .fillMaxSize()
                     .padding(horizontal = 28.dp)
-                    .graphicsLayer { alpha = 1f - (offset.absoluteValue * 0.7f).coerceAtMost(1f) },
+                    .graphicsLayer { alpha = 1f - (offset().absoluteValue * 0.7f).coerceAtMost(1f) },
                 verticalArrangement = Arrangement.Center,
             ) {
                 // The art moves faster than the text, for depth.
@@ -98,7 +99,7 @@ fun OnboardingScreen(onDone: () -> Unit) {
                     Modifier
                         .fillMaxWidth()
                         .height(260.dp)
-                        .graphicsLayer { translationX = offset * size.width * 0.45f },
+                        .graphicsLayer { translationX = offset() * size.width * 0.45f },
                     contentAlignment = Alignment.Center,
                 ) {
                     when (page) {
@@ -257,6 +258,7 @@ private fun ShareLinkButton() {
 @Composable
 private fun PermissionsPage() {
     val nearby = rememberPermission(Manifest.permission.BLUETOOTH_CONNECT)
+    @SuppressLint("InlinedApi") // gated: rememberPermission ignores it below API 33
     val notifications = rememberPermission(Manifest.permission.POST_NOTIFICATIONS, minSdk = 33)
     PageText(stringResource(R.string.onb_perm_title), stringResource(R.string.onb_perm_body))
     Spacer(Modifier.height(20.dp))

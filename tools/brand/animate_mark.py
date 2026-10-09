@@ -8,7 +8,6 @@ cubic-bezier(0.65, 0, 0.25, 1) curve, then the point lands on an underdamped spr
 """
 
 import math
-from pathlib import Path
 
 from PIL import Image, ImageDraw
 

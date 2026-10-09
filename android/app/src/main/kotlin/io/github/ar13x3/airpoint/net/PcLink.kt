@@ -70,7 +70,7 @@ class PcLink(
                 when (msg.optString("type")) {
                     "welcome" -> {
                         welcomed = true
-                        flushTask = flusher.scheduleAtFixedRate({ flushMotion() }, FLUSH_MS, FLUSH_MS, TimeUnit.MILLISECONDS)
+                        flushTask = flusher.scheduleWithFixedDelay({ flushMotion() }, FLUSH_MS, FLUSH_MS, TimeUnit.MILLISECONDS)
                         listener.onWelcome(
                             msg.optString("pc_id"),
                             msg.optString("name").ifBlank { endpoint.name },

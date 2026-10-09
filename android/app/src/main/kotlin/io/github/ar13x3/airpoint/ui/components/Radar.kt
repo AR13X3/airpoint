@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,10 +46,12 @@ fun Radar(found: List<DiscoveredPc>, modifier: Modifier = Modifier) {
     val echo by loop.animateFloat(0f, 1f, infiniteRepeatable(tween(2400, easing = LinearEasing)), label = "echo")
 
     // Each PC pops in once, at a stable angle derived from its id.
-    val blips = remember { mutableMapOf<String, Animatable<Float, androidx.compose.animation.core.AnimationVector1D>>() }
-    found.forEach { pc -> blips.getOrPut(pc.id) { Animatable(0f) } }
-    found.forEach { pc ->
-        LaunchedEffect(pc.id) { blips[pc.id]?.animateTo(1f, spring(dampingRatio = 0.45f, stiffness = 420f)) }
+    val blips = found.associate { pc ->
+        pc.id to key(pc.id) {
+            val pop = remember { Animatable(0f) }
+            LaunchedEffect(Unit) { pop.animateTo(1f, spring(dampingRatio = 0.45f, stiffness = 420f)) }
+            pop
+        }
     }
 
     Box(modifier.aspectRatio(1f), contentAlignment = Alignment.Center) {

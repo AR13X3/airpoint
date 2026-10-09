@@ -6,7 +6,10 @@ DISPLAY above that. Each cut is split into the stroke and the point so the point
 a status color on its own.
 """
 
-from ._mark import DISPLAY_DOT, DISPLAY_STROKE, SMALL_DOT, SMALL_STROKE  # noqa: F401  (generated)
+from ._mark import DISPLAY_DOT, DISPLAY_STROKE, SMALL_DOT, SMALL_STROKE  # generated geometry
+
+__all__ = ["DISPLAY_STROKE", "DISPLAY_DOT", "SMALL_STROKE", "SMALL_DOT",
+           "INK", "PAPER", "ACCENT", "ACCENT_ON_DARK", "LIVE", "MUTED"]
 
 # Palette (sRGB)
 INK = (13, 15, 20)            # #0D0F14

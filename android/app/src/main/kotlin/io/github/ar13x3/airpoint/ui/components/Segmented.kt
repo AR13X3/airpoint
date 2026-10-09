@@ -33,6 +33,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import io.github.ar13x3.airpoint.ui.theme.Air
 import io.github.ar13x3.airpoint.ui.theme.Motion
@@ -57,7 +58,7 @@ fun <T> Segmented(
         val x by animateDpAsState(segment * index, Motion.lively(), label = "indicator")
         Box(
             Modifier
-                .offset(x = x)
+                .offset { IntOffset(x.roundToPx(), 0) }
                 .width(segment)
                 .fillMaxHeight()
                 .shadow(3.dp, CircleShape)

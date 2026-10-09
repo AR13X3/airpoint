@@ -28,7 +28,6 @@
     <string name="perm_notifications_body">To keep Airpoint running while you use other apps.</string>
     <string name="perm_allow">Allow</string>
     <string name="perm_allowed">Allowed</string>
-    <string name="perm_open_settings">Open settings</string>
     <string name="get_started">Get started</string>
 
     <!-- Home: headlines -->
@@ -66,7 +65,6 @@
     <string name="action_start">Start pointing</string>
     <string name="action_stop">Stop</string>
     <string name="action_connecting">Connecting</string>
-    <string name="action_pair">Pair a computer</string>
     <string name="action_pair_again">Pair again</string>
     <string name="action_allow">Allow Nearby devices</string>
     <string name="action_reconnect_spen">Reconnect S Pen</string>
@@ -91,7 +89,6 @@
     <string name="pair_title">Connect a computer</string>
     <string name="pair_scanning">Looking for computers on this network…</string>
     <string name="pair_found">Found %1$d</string>
-    <string name="pair_found_none">Nothing yet</string>
     <string name="pair_paired_badge">Paired</string>
     <string name="pair_saved">Paired before</string>
     <string name="pair_offline">Not seen on this network</string>
@@ -112,7 +109,6 @@
     <string name="pin_incompatible">%1$s runs a different version of Airpoint.</string>
     <string name="pin_success">Paired with %1$s</string>
     <string name="pin_success_body">From now on it reconnects on its own.</string>
-    <string name="pin_digit">PIN digit %1$d</string>
 
     <!-- Settings -->
     <string name="settings_pointer">Pointer</string>

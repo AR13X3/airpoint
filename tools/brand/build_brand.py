@@ -187,7 +187,6 @@ def main():
           vector([d_stroke, d_dot], ACCENT, 108, 108, icon_scale, round(icon_shift, 2), note))
     write(res / "ic_launcher_monochrome.xml",
           vector([d_stroke, d_dot], "#FFFFFFFF", 108, 108, icon_scale, round(icon_shift, 2), note))
-    write(res / "ic_mark.xml", vector([d_stroke, d_dot], "#FFFFFFFF", 48, 48, comment=note))
     write(res / "ic_stat_airpoint.xml", vector([s_stroke, s_dot], "#FFFFFFFF", 48, 24, comment=note))
     splash_scale = 1.15  # the splash icon is masked to a circle of 2/3 its size
     write(res / "ic_splash.xml",
